@@ -1,4 +1,4 @@
-module github.com/braumsmilk/go-log
+module github.com/ooqls/go-log
 
 go 1.22.0
 
