@@ -58,17 +58,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LevelEnum'
-  /v1/logging/level:
-    get:
-      summary: Get the current logging level
-      operationId: getLoggingLevel
-      responses:
-        '200':
-          description: Successful response with the current logging level
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LevelEnum'
   /v1/logging/{format}:
     put:
       summary: Update the logging format
@@ -80,17 +69,6 @@ paths:
             $ref: '#/components/schemas/FormatEnum'
           required: true
           description: The logging format to set
-      responses:
-        '200':
-          description: Successful response with the current logging format
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FormatEnum'
-  /v1/logging/format:
-    get:
-      summary: Get the current logging format
-      operationId: getLoggingFormat
       responses:
         '200':
           description: Successful response with the current logging format

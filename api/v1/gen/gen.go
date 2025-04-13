@@ -42,12 +42,6 @@ type ServerInterface interface {
 	// Get the current logging configuration
 	// (GET /v1/logging/config)
 	GetLoggingConfig(c *gin.Context)
-	// Get the current logging format
-	// (GET /v1/logging/format)
-	GetLoggingFormat(c *gin.Context)
-	// Get the current logging level
-	// (GET /v1/logging/level)
-	GetLoggingLevel(c *gin.Context)
 	// Update the logging format
 	// (PUT /v1/logging/{format})
 	UpdateLoggingFormat(c *gin.Context, format FormatEnum)
@@ -76,32 +70,6 @@ func (siw *ServerInterfaceWrapper) GetLoggingConfig(c *gin.Context) {
 	}
 
 	siw.Handler.GetLoggingConfig(c)
-}
-
-// GetLoggingFormat operation middleware
-func (siw *ServerInterfaceWrapper) GetLoggingFormat(c *gin.Context) {
-
-	for _, middleware := range siw.HandlerMiddlewares {
-		middleware(c)
-		if c.IsAborted() {
-			return
-		}
-	}
-
-	siw.Handler.GetLoggingFormat(c)
-}
-
-// GetLoggingLevel operation middleware
-func (siw *ServerInterfaceWrapper) GetLoggingLevel(c *gin.Context) {
-
-	for _, middleware := range siw.HandlerMiddlewares {
-		middleware(c)
-		if c.IsAborted() {
-			return
-		}
-	}
-
-	siw.Handler.GetLoggingLevel(c)
 }
 
 // UpdateLoggingFormat operation middleware
@@ -180,8 +148,6 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	}
 
 	router.GET(options.BaseURL+"/v1/logging/config", wrapper.GetLoggingConfig)
-	router.GET(options.BaseURL+"/v1/logging/format", wrapper.GetLoggingFormat)
-	router.GET(options.BaseURL+"/v1/logging/level", wrapper.GetLoggingLevel)
 	router.PUT(options.BaseURL+"/v1/logging/:format", wrapper.UpdateLoggingFormat)
 	router.PUT(options.BaseURL+"/v1/logging/:level", wrapper.UpdateLoggingLevel)
 }
