@@ -43,10 +43,10 @@ type ServerInterface interface {
 	// (GET /v1/logging/config)
 	GetLoggingConfig(c *gin.Context)
 	// Update the logging format
-	// (PUT /v1/logging/{format})
+	// (PUT /v1/logging/format/{format})
 	UpdateLoggingFormat(c *gin.Context, format FormatEnum)
 	// Update the logging level
-	// (PUT /v1/logging/{level})
+	// (PUT /v1/logging/level/{level})
 	UpdateLoggingLevel(c *gin.Context, level LevelEnum)
 }
 
@@ -148,6 +148,6 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	}
 
 	router.GET(options.BaseURL+"/v1/logging/config", wrapper.GetLoggingConfig)
-	router.PUT(options.BaseURL+"/v1/logging/:format", wrapper.UpdateLoggingFormat)
-	router.PUT(options.BaseURL+"/v1/logging/:level", wrapper.UpdateLoggingLevel)
+	router.PUT(options.BaseURL+"/v1/logging/format/:format", wrapper.UpdateLoggingFormat)
+	router.PUT(options.BaseURL+"/v1/logging/level/:level", wrapper.UpdateLoggingLevel)
 }

@@ -40,7 +40,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LoggingConfig'
-  /v1/logging/{level}:
+  /v1/logging/level/{level}:
     put:
       summary: Update the logging level
       operationId: updateLoggingLevel
@@ -58,7 +58,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LevelEnum'
-  /v1/logging/{format}:
+  /v1/logging/format/{format}:
     put:
       summary: Update the logging format
       operationId: updateLoggingFormat
