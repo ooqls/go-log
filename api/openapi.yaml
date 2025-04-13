@@ -1,0 +1,100 @@
+openapi: 3.1.0
+info:
+  title: Logging api Specification
+  description: This is an API for configuring logging settings.
+  version: 1.0.0
+
+components:
+  schemas:
+    LoggingConfig:
+      type: object
+      properties:
+        level:
+          $ref: '#/components/schemas/LevelEnum'
+        format:
+          $ref: '#/components/schemas/FormatEnum'
+      required:
+      - level
+      - format
+    LevelEnum:
+      type: string
+      enum:
+        - DEBUG
+        - INFO
+        - WARNING
+        - ERROR
+    FormatEnum:
+      type: string
+      enum:
+        - JSON
+        - TEXT
+paths:
+  /v1/logging/config:
+    get:
+      summary: Get the current logging configuration
+      operationId: getLoggingConfig
+      responses:
+        '200':
+          description: Successful response with the current logging configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoggingConfig'
+  /v1/logging/{level}:
+    put:
+      summary: Update the logging level
+      operationId: updateLoggingLevel
+      parameters:
+        - in: path
+          name: level
+          schema:
+            $ref: '#/components/schemas/LevelEnum'
+          required: true
+          description: The logging level to set
+      responses:
+        '200':
+          description: Successful response with the current logging level
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LevelEnum'
+  /v1/logging/level:
+    get:
+      summary: Get the current logging level
+      operationId: getLoggingLevel
+      responses:
+        '200':
+          description: Successful response with the current logging level
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LevelEnum'
+  /v1/logging/{format}:
+    put:
+      summary: Update the logging format
+      operationId: updateLoggingFormat
+      parameters:
+        - in: path
+          name: format
+          schema:
+            $ref: '#/components/schemas/FormatEnum'
+          required: true
+          description: The logging format to set
+      responses:
+        '200':
+          description: Successful response with the current logging format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormatEnum'
+  /v1/logging/format:
+    get:
+      summary: Get the current logging format
+      operationId: getLoggingFormat
+      responses:
+        '200':
+          description: Successful response with the current logging format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormatEnum'
