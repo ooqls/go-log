@@ -1,11 +1,17 @@
 package v1
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
-	"github.com/ooqls/go-log/api/v1/gen"
-	"github.com/ooqls/go-log/api/v1/impl"
+	gingen "github.com/ooqls/go-log/api/gin/v1/gen"
+	stdgen "github.com/ooqls/go-log/api/std/v1/gen"
 )
 
-func AddRoutes(e *gin.Engine) {	
-	gen.RegisterHandlers(e, &impl.LoggingServerImpl{})
+func Gin(e *gin.Engine) {
+	gingen.RegisterHandlers(e, &LoggingServerGinImpl{})
+}
+
+func Std() http.Handler {
+	return stdgen.Handler(&LoggingServerStdImpl{})
 }

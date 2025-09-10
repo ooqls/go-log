@@ -1,4 +1,4 @@
-package impl
+package v1
 
 import (
 	"github.com/gin-gonic/gin"
@@ -6,11 +6,9 @@ import (
 	"github.com/ooqls/go-log/api/v1/gen"
 )
 
-var _ gen.ServerInterface = &LoggingServerImpl{}
+type LoggingServerGinImpl struct{}
 
-type LoggingServerImpl struct{}
-
-func (l *LoggingServerImpl) GetLoggingConfig(c *gin.Context) {
+func (l *LoggingServerGinImpl) GetLoggingConfig(c *gin.Context) {
 	cfg := gen.LoggingConfig{
 		Format: log.GetFormat(),
 		Level:  log.GetLevel(),
@@ -21,7 +19,7 @@ func (l *LoggingServerImpl) GetLoggingConfig(c *gin.Context) {
 	c.JSON(200, cfg)
 }
 
-func (l *LoggingServerImpl) SetLoggingConfig(c *gin.Context, cfg gen.LoggingConfig) {
+func (l *LoggingServerGinImpl) SetLoggingConfig(c *gin.Context, cfg gen.LoggingConfig) {
 	// Implement the logic to set the logging configuration
 	// For example, you might want to write to a config file or environment variable
 	log.SetFormat(cfg.Format)
@@ -32,7 +30,7 @@ func (l *LoggingServerImpl) SetLoggingConfig(c *gin.Context, cfg gen.LoggingConf
 	})
 }
 
-func (l *LoggingServerImpl) UpdateLoggingLevel(c *gin.Context, level gen.LevelEnum) {
+func (l *LoggingServerGinImpl) UpdateLoggingLevel(c *gin.Context, level gen.LevelEnum) {
 	// Implement the logic to set the log level
 	// For example, you might want to write to a config file or environment variable
 	log.SetLogLevel(level)
@@ -40,7 +38,7 @@ func (l *LoggingServerImpl) UpdateLoggingLevel(c *gin.Context, level gen.LevelEn
 	c.JSON(200, level)
 }
 
-func (l *LoggingServerImpl) UpdateLoggingFormat(c *gin.Context, f gen.FormatEnum) {
+func (l *LoggingServerGinImpl) UpdateLoggingFormat(c *gin.Context, f gen.FormatEnum) {
 	log.SetFormat(gen.FormatEnum(f))
 	c.JSON(200, gin.H{
 		"message": "Logging format updated successfully",

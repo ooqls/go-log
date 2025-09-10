@@ -33,7 +33,7 @@ var cfg *zap.Config = &zap.Config{
 	OutputPaths:      []string{"stdout"},
 	ErrorOutputPaths: []string{"stderr"},
 	Encoding:         "json",
-	EncoderConfig:    *encodingConfig, 
+	EncoderConfig:    *encodingConfig,
 }
 
 type LogLevel string

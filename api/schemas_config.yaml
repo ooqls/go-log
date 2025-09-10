@@ -1,6 +1,6 @@
 package: gen
 generate:
-  gin-server: true
   models: true
-
+output-options:
+  skip-prune: true
 output: ../api/v1/gen/gen.go
